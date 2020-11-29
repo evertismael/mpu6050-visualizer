@@ -3,14 +3,32 @@ import numpy as np
 import pickle
 import time
 
+# sensor:
 mpu = mpu6050(0x68)
 
-while True:
-    temp = mpu.get_temp()
-    accel_data = mpu.get_accel_data()
-    gyro_data = mpu.get_gyro_data()
-    time.sleep(2) # 50 miliseconds
+# File:
+file_name = 'mpu6050_data.file'
 
-    print(type(temp))
-    print(type(accel_data))
-    print(type(gyro_data))
+t = 0
+delta_time = 0.20
+with open(file_name,'ab') as f:
+    while True:
+        accel_data = mpu.get_accel_data() # dict
+        gyro_data = mpu.get_gyro_data() # dict
+
+        # vector measurement: [time,tmp,accX,axxY,axxZ,grX,grY,grZ]
+        vector = np.empty((1,8))
+
+        vector[0] = t*delta_time
+        vector[1] = mpu.get_temp()
+
+        vector[2] = accel_data['x']
+        vector[3] = accel_data['y']
+        vector[4] = accel_data['z']
+
+        vector[5] = gyro_data['x']
+        vector[6] = gyro_data['y']
+        vector[7] = gyro_data['z']
+
+        time.sleep(delta_time)
+        t = t + 1
