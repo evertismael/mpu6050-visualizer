@@ -28,6 +28,6 @@ while True:
 
     with open(file_name, 'ab') as f:
         pickle.dump(vector, f)
-    print('data')
+    print(vector)
     t = t+1
     time.sleep(delta_time)
