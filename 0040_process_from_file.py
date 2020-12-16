@@ -145,5 +145,5 @@ class FirstFrame(tk.Frame):
         canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
 app = MyApp()
-ani = animation.FuncAnimation(f,animate,interval=dt)
+ani = animation.FuncAnimation(f,animate,interval=10)
 app.mainloop()
