@@ -9,7 +9,7 @@ mpu = mpu6050(0x68)
 # File:
 file_name = 'mpu6050_data.file'
 t = 0
-delta_time = 0.2
+delta_time = 0.002
 vector = np.zeros((8,))
 while True:
     accel_data = mpu.get_accel_data()
