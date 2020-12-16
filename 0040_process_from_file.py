@@ -43,8 +43,8 @@ axs.set_autoscale_on(True)
 
 
 i = 1
-dt = 200
-gamma = 0.7
+dt = 2*9
+gamma = 0.9
 giro_angles = np.array([0, 0, 0])
 
 def complementary_filter(gamma, giro_angles,acc_angles):
@@ -61,8 +61,8 @@ def animate(i):
     acc_rho = np.arctan2(acc_XYZ[0], np.sqrt(acc_XYZ[1] ** 2 + acc_XYZ[2] ** 2)) * 180 / np.pi
     acc_angles = np.array([acc_theta, acc_phi, acc_rho])
 
-    if i == 1:
-        giro_angles = acc_angles
+    if i == 1 or i % 100 == 0:
+        giro_angles = cf_angles
     # Giro processing:
     giro_W = np.array([gr_w_theta[i], gr_w_phi[i], gr_w_rho[i]])
     giro_angles = giro_angles + giro_W * (dt*1e-3)
@@ -145,5 +145,5 @@ class FirstFrame(tk.Frame):
         canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
 app = MyApp()
-ani = animation.FuncAnimation(f,animate,interval=10)
+ani = animation.FuncAnimation(f,animate,interval=dt)
 app.mainloop()
