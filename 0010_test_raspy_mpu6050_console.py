@@ -49,3 +49,4 @@ while True:
     # log incoming data:
     print('-- RAW data:')
     print(gyro_x)
+    print("acc  [ ]     ax,ay,az: {},{},{}".format(acc_x, acc_y, acc_z))
