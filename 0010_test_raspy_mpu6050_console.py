@@ -1,9 +1,8 @@
 #!/usr/bin/python
 import smbus
-import math
 import numpy as np
-import pickle
-import time
+import helpers as helpers
+# source: https://tutorials-raspberrypi.com/measuring-rotation-and-acceleration-raspberry-pi/
 
 # Register
 power_mgmt_1 = 0x6b
@@ -23,49 +22,39 @@ def read_word(reg):
 
 def read_word_2c(reg):
     val = read_word(reg)
-    if (val >= 0x8000):
+    if val >= 0x8000:
         return -((65535 - val) + 1)
     else:
         return val
 
 
-def dist(a, b):
-    return math.sqrt((a * a) + (b * b))
-
-
-def get_y_rotation(x, y, z):
-    radians = math.atan2(x, dist(y, z))
-    return -math.degrees(radians)
-
-
-def get_x_rotation(x, y, z):
-    radians = math.atan2(y, dist(x, z))
-    return math.degrees(radians)
-
-
 bus = smbus.SMBus(1)  # bus = smbus.SMBus(0) fuer Revision 1
 address = 0x68  # via i2cdetect
 
-# Aktivieren, um das Modul ansprechen zu koennen
+# Activate to be able to address the module
 bus.write_byte_data(address, power_mgmt_1, 0)
-
-
-
-vector = np.zeros((8,))
 while True:
-    gyro_xout = read_word_2c(0x43) / 131
-    gyro_yout = read_word_2c(0x45) / 131
-    gyro_zout = read_word_2c(0x47) / 131
+    gyro_x = read_word_2c(0x43) / 131
+    gyro_y = read_word_2c(0x45) / 131
+    gyro_z = read_word_2c(0x47) / 131
 
-    acc_xout = read_word_2c(0x3b) / 16384.0
-    acc_yout = read_word_2c(0x3d) / 16384.0
-    acc_zout = read_word_2c(0x3f) / 16384.0
+    acc_x = read_word_2c(0x3b) / 16384.0
+    acc_y = read_word_2c(0x3d) / 16384.0
+    acc_z = read_word_2c(0x3f) / 16384.0
 
-    print('acc:')
-    print(acc_xout, acc_yout, acc_zout)
+    # convert to Angles and Angular Velocities:
+    factor = 180/np.pi  # set to 1 if output in radians.
+    roll, pitch, yaw = helpers.get_roll_pitch_yaw(acc_x, acc_y, acc_z, factor=factor)
 
-    print('gyro:')
-    print(gyro_xout, gyro_yout, gyro_zout)
+    # log incoming data:
+    print('-- RAW data:')
+    print("gyro [°/sec] wx,wy,wz: {},{},{}".format(gyro_x, gyro_y, gyro_z))
+    print("acc  [ ]     ax,ay,az: {},{},{}".format(acc_x, acc_y, acc_z))
+
+    print('-- RAW data:')
+    print("roll,pitch,yaw  [°] : {},{},{}".format(roll, pitch, yaw))
+
+
 
 
 
