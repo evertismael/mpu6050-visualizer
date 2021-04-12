@@ -50,4 +50,4 @@ while True:
     print('-- Raw data:')
     print("acc  [ ]     ax,ay,az: {0:.2f},{0:.2f},{0:.2f}".format(acc_x, acc_y, acc_z))
     print('-- angles acc only:')
-    print("roll,pitch,yaw  [°] : {0:.2f},{0:.2f},{0:.2f}".format(roll, pitch, yaw))
+    #print("roll,pitch,yaw: {0:.2f},{0:.2f},{0:.2f}".format(roll, pitch, yaw))
