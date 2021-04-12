@@ -49,11 +49,11 @@ while True:
     # log incoming data:
     print('-- RAW data:')
     print(gyro_x)
-    print("gyro [°/sec] wx,wy,wz: {},{},{}".format(float(gyro_x), float(gyro_y), float(gyro_z)))
-    print("acc  [ ]     ax,ay,az: {},{},{}".format(acc_x, acc_y, acc_z))
+    #print("gyro [°/sec] wx,wy,wz: {},{},{}".format(float(gyro_x), float(gyro_y), float(gyro_z)))
+    #print("acc  [ ]     ax,ay,az: {},{},{}".format(acc_x, acc_y, acc_z))
 
-    print('-- RAW data:')
-    print("roll,pitch,yaw  [°] : {},{},{}".format(roll, pitch, yaw))
+    #print('-- RAW data:')
+    #print("roll,pitch,yaw  [°] : {},{},{}".format(roll, pitch, yaw))
 
 
 
