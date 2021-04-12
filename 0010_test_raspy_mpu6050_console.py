@@ -49,10 +49,8 @@ while True:
 
     # log incoming data:
     print('-- Raw data:')
-    print("gyro [deg/sec] wx,wy,wz: {0:.2f},{0:.2f},{0:.2f}".format(gyro_x, gyro_y, gyro_z))
-    print("acc  [       ] ax,ay,az: {0:.2f},{0:.2f},{0:.2f}".format(acc_x, acc_y, acc_z))
+    print("gyro [deg/sec] wx,wy,wz: {0:.2f},{1:.2f},{2:.2f}".format(gyro_x, gyro_y, gyro_z))
+    print("acc  [       ] ax,ay,az: {0:.2f},{1:.2f},{2:.2f}".format(acc_x, acc_y, acc_z))
     print('-- angles acc only: factor=1 (radians), factor=180/pi (degrees)')
-    print("roll,pitch,yaw: {0:.2f},{0:.2f},{0:.2f}".format(roll, pitch, yaw))
-    a,b,c = 1.1,2.2,3.3
-    print("roll,pitch,yaw: {0:.2f},{0:.2f},{0:.2f}".format(a,b,c))
+    print("roll,pitch,yaw: {0:.2f},{1:.2f},{2:.2f}".format(roll, pitch, yaw))
     time.sleep(1)
