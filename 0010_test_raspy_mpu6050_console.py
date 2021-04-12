@@ -53,4 +53,4 @@ while True:
     print(roll)
     print(pitch)
     print(yaw)
-    print("roll,pitch,yaw: {0:.2f}".format(roll))
+    print("roll,pitch,yaw: {0:.2f}, {0:.2f}".format(roll,pitch))
