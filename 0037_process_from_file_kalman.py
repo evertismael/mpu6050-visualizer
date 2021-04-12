@@ -24,6 +24,8 @@ def get_cf_angles(a, cf_angles_prev, gr_W_i, dt, ac_angles):
 
 
 class KalmanFilter:
+    # definition Kalman filter:
+    # https: // eu.mouser.com / applications / sensor_solutions_mems /
     def __init__(self, sigma_angles,sigma_w):
         self.sigma_angles = sigma_angles
         self.sigma_w = sigma_w
