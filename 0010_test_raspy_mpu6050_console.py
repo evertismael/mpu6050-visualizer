@@ -51,4 +51,6 @@ while True:
     print("acc  [ ]     ax,ay,az: {0:.2f},{0:.2f},{0:.2f}".format(acc_x, acc_y, acc_z))
     print('-- angles acc only:')
     print(roll)
+    print(pitch)
+    print(yaw)
     print("roll,pitch,yaw: {0:.2f}".format(roll))
