@@ -48,3 +48,4 @@ while True:
 
     # log incoming data:
     print('-- RAW data:')
+    print(gyro_x)
