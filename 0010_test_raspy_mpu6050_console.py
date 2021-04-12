@@ -47,5 +47,7 @@ while True:
     roll, pitch, yaw = helpers.get_roll_pitch_yaw(acc_x, acc_y, acc_z, factor=factor)
 
     # log incoming data:
-    print('-- RAW data:')
+    print('-- Raw data:')
     print("acc  [ ]     ax,ay,az: {0:.2f},{0:.2f},{0:.2f}".format(acc_x, acc_y, acc_z))
+    print('-- angles acc only:')
+    print("roll,pitch,yaw  [°] : {0:.2f},{0:.2f},{0:.2f}".format(roll, pitch, yaw))
