@@ -35,7 +35,7 @@ address = 0x68  # via i2cdetect
 bus.write_byte_data(address, power_mgmt_1, 0)
 
 # File:
-file_name = 'test.mpudat'
+file_name = 'capture_0010.mpudat'
 
 measurement = np.zeros((10,))  # angles,gyro,acc,t
 
