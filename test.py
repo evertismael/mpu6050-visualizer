@@ -16,10 +16,20 @@ print(measurement)
 
 file_name = 't.t'
 
+from pathlib import Path
+import numpy as np
+import os
 
-while True:
-    with open(file_name, 'ab') as f:
-        np.save(f,measurement)
-    print(measurement)
-    time.sleep(0.1)
+p = Path('temp.npy')
+with p.open('ab') as f:
+    np.save(f, np.zeros(2))
+    np.save(f, np.ones(2))
+
+with p.open('rb') as f:
+    fsz = os.fstat(f.fileno()).st_size
+    out = np.load(f)
+    while f.tell() < fsz:
+        out = np.vstack((out, np.load(f)))
+        print(out)
+
 
