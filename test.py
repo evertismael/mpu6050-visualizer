@@ -18,6 +18,7 @@ file_name = 't.t'
 
 while True:
     with open(file_name, 'ab') as f:
-        pickle.dump(measurement, f)
+        np.save(f,measurement)
     print(measurement)
     time.sleep(0.1)
+

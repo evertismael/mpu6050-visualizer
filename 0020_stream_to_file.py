@@ -58,6 +58,7 @@ while True:
     measurement[7:10] = np.array([acc_x, acc_y, acc_z])
     print(measurement.shape)
     with open(file_name, 'wb') as f:
-        pickle.dump(measurement, f)
+        #pickle.dump(measurement, f)
+        np.save(f,measurement)
     print(measurement)
     time.sleep(0.05)
