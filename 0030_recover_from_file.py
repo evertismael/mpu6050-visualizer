@@ -13,14 +13,13 @@ file_name = 'capture_0010.mpudat'
 #dst = file_name + ".tmp"
 #open(dst, "w").write(data) # save a temporary file
 data = []
+print(np.load(file_name))
+print('ds')
 with open(file_name, 'rb') as f:
     while True:
         try:
-            #data.append(pickle.load(f, encoding="latin1"))
-            string = f.read()
-            b = bytes(string, 'ascii')
-            res = pickle.loads(b)
-            print(res)
+            data.append(np.load(f))
+            #print(res)
         except EOFError:
             break
 data = np.array(data)

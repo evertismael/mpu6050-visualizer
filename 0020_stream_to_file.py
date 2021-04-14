@@ -39,6 +39,10 @@ file_name = 'capture_0010.mpudat'
 
 measurement = np.zeros((10,))  # angles,gyro,acc,t
 
+# this erase/initiates the file
+with open(file_name, 'wb') as f:
+    np.save(f, measurement)
+
 while True:
     gyro_x = read_word_2c(0x43) / 131
     gyro_y = read_word_2c(0x45) / 131
@@ -57,8 +61,7 @@ while True:
     measurement[4:7] = np.array([gyro_x, gyro_y, gyro_z])
     measurement[7:10] = np.array([acc_x, acc_y, acc_z])
     print(measurement.shape)
-    with open(file_name, 'wb') as f:
-        #pickle.dump(measurement, f)
+    with open(file_name, 'ab') as f:
         np.save(f,measurement)
     print(measurement)
     time.sleep(0.05)
