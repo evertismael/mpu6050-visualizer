@@ -7,7 +7,7 @@ import time
 # Read the File / Load data:
 # --------------------------------------------------------------------------------------------------------------------
 
-file_name = 'capture_0010.mpudat'
+file_name = 'mpu6050_data.file'
 data = []
 with open(file_name, 'rb') as f:
     while True:

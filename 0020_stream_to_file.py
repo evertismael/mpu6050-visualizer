@@ -56,6 +56,7 @@ while True:
     measurement[1:4] = np.array([roll, pitch, yaw])
     measurement[4:7] = np.array([gyro_x, gyro_y, gyro_z])
     measurement[7:10] = np.array([acc_x, acc_y, acc_z])
+    print(measurement.shape)
     with open(file_name, 'ab') as f:
         pickle.dump(measurement, f)
     print(measurement)
