@@ -57,7 +57,7 @@ while True:
     measurement[4:7] = np.array([gyro_x, gyro_y, gyro_z])
     measurement[7:10] = np.array([acc_x, acc_y, acc_z])
     print(measurement.shape)
-    with open(file_name, 'ab') as f:
+    with open(file_name, 'wb') as f:
         pickle.dump(measurement, f)
     print(measurement)
     time.sleep(0.05)

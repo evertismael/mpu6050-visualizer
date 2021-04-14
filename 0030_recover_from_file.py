@@ -6,10 +6,14 @@ import time
 # --------------------------------------------------------------------------------------------------------------------
 # Read the File / Load data:
 # --------------------------------------------------------------------------------------------------------------------
+print('dddd')
+file_name = 'capture_0010.t'
 
-file_name = 'capture_0010.mpudat'
+data = open(file_name).read().replace('\r\n', '\n') # read and replace file contents
+dst = file_name + ".tmp"
+open(dst, "w").write(data) # save a temporary file
 data = []
-with open(file_name, 'rb') as f:
+with open(dst, 'rb') as f:
     while True:
         try:
             data.append(pickle.load(f, encoding="latin1"))

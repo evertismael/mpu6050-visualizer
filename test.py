@@ -3,11 +3,14 @@
 import time
 import pickle
 import numpy as np
-roll = 1.
-pitch = 2.
-yaw = 3.
+roll = 1.4
+pitch = 2.3
+yaw = 3.0
 measurement = np.zeros((10,))
 measurement[1:4] = np.array([roll, pitch, yaw])
+measurement[4:7] = np.array([roll, pitch, yaw])
+measurement[7:10] = np.array([roll, pitch, yaw])
+
 print(measurement)
 
 
