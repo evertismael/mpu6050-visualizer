@@ -59,4 +59,4 @@ while True:
     with open(file_name, 'ab') as f:
         pickle.dump(measurement, f)
     print(measurement)
-    time.sleep(0.05 )
+    time.sleep(0.05)
