@@ -53,8 +53,10 @@ while True:
     roll, pitch, yaw = helpers.get_roll_pitch_yaw(acc_x, acc_y, acc_z, factor=factor)
 
     measurement[0] = int(round(time.time() * 1000))
-    measurement[1:3] = np.array([roll, pitch, yaw])
+    measurement[1:4] = np.array([roll, pitch, yaw])
+    measurement[4:7] = np.array([gyro_x, gyro_y, gyro_z])
+    measurement[7:10] = np.array([acc_x, acc_y, acc_z])
     with open(file_name, 'ab') as f:
         pickle.dump(measurement, f)
     print(measurement)
-    time.sleep(1)
+    time.sleep(0.05)
