@@ -1,7 +1,15 @@
 # TODO:
 # Stream to a file, and plot the raw data in degrees and rad/sec
+
+
+
 import time
 import pickle
+
+
+
+
+
 import numpy as np
 roll = 1.4
 pitch = 2.3
