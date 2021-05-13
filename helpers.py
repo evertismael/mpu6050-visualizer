@@ -60,9 +60,9 @@ def rotate_corners(angles):
     scale = np.expand_dims(scale, axis=1)
     p = scale * p
     # rotation matrices:
-    Rtheta = np.array([[np.cos(roll), 0., -np.sin(roll)], [0., 1., 0.], [np.sin(roll), 0., np.cos(roll)]])
-    Rphi = np.array([[1., 0, 0.], [0., np.cos(pitch), np.sin(pitch)], [0., -np.sin(pitch), np.cos(pitch)]])
+    Rtheta = np.array([[np.cos(-roll), 0., -np.sin(-roll)], [0., 1., 0.], [np.sin(-roll), 0., np.cos(-roll)]])
+    Rphi = np.array([[1., 0, 0.], [0., np.cos(-pitch), np.sin(-pitch)], [0., -np.sin(-pitch), np.cos(-pitch)]])
     Rrho = np.array([[np.cos(yaw), np.sin(yaw), 0.], [-np.sin(yaw), np.cos(yaw), 0], [0, 0, 1]])
 
-    pt = np.matmul(Rrho, np.matmul(Rtheta, np.matmul(Rphi, p)))
+    pt = np.matmul(Rrho, np.matmul(Rphi, np.matmul(Rtheta, p)))
     return pt

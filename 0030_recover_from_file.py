@@ -8,12 +8,21 @@ import helpers as helpers
 file_name = 'capture_0010.mpudat'
 t, angles, acc, w = helpers.get_data_from_file(file_name, degrees=True)
 
+# get angles from gyros:
+angles_g = np.zeros_like(angles)
+tmp = np.zeros((3, 1))
+w = w - w[:, 0:1]
+for i in range(1,angles_g.shape[1]):
+    dt = t[i] - t[i-1]
+    angles_g[:, i] = angles_g[:, i-1] + dt*w[:, i]
+
 # --------------------------------------------------------------------------------------------------------------------
 # Plot the data:
 # --------------------------------------------------------------------------------------------------------------------
 fig, axs = plt.subplots(3, 3)
 for i in range(0, 3):
     axs[0, i].plot(t, angles[i, :])
+    axs[0, i].plot(t, angles_g[i, :])
     axs[1, i].plot(t, acc[i, :])
     axs[2, i].plot(t, w[i, :])
     for j in range(0,3):

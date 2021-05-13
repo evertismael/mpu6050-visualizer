@@ -17,8 +17,11 @@ w_0 = np.zeros((3, 1))
 # remove initial bias (Assume it starts static)
 w = w - w[:, 2:3]
 
+angles[0,:] = angles[0,:]*-1
+w[0,:] = w[0,:]
+
 w_0 = w[:, 2]
-comp_filter = filters.ComplementaryFilter(x_0=np.zeros((3, 1)), w_0=w_0, alpha=0.9)
+comp_filter = filters.ComplementaryFilter(x_0=np.zeros((3, 1)), w_0=w_0, alpha=0.8)
 kf_filter = filters.KalmanFilter(sigma_angles=4**2, sigma_w=2**2)
 
 cf_angles = np.zeros((3, t.shape[0]))
