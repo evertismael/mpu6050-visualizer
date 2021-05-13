@@ -62,5 +62,5 @@ while True:
     measurement[7:10] = np.array([acc_x, acc_y, acc_z])
     with open(file_name, 'ab') as f:
         np.save(f,measurement)
-    print(measurement[0])
+    print(measurement)
     time.sleep(0.001)
