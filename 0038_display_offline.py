@@ -21,11 +21,11 @@ t, angles, _, w = helpers.get_data_from_file(file_name, degrees=True)
 # --------------------------------------------------------------------------------------------------------------------
 w_0 = np.zeros((3, 1))
 # remove initial bias (Assume it starts static)
-w = w - w[:, 2:3]
-
+w = w - w[:, 1:2]
 w_0 = w[:, 2]
+
 comp_filter = filters.ComplementaryFilter(x_0=np.zeros((3, 1)), w_0=w_0, alpha=0.9)
-kf_filter = filters.KalmanFilter(sigma_angles=4**2, sigma_w=2**2)
+kf_filter = filters.KalmanFilter(sigma_angles=3**2, sigma_w=2**2)
 
 cf_angles = np.zeros((3, t.shape[0]))
 kf_angles = np.zeros((3, t.shape[0]))
@@ -56,13 +56,9 @@ ax_roll = f.add_subplot(2,3,1)
 ax_pitch = f.add_subplot(2,3,2)
 ax_yaw = f.add_subplot(2,3,3)
 
-ax_acc = f.add_subplot(2,3,4, projection="3d")
-ax_acc.set_aspect("auto")
-ax_acc.set_autoscale_on(True)
-
-ax_cf = f.add_subplot(2,3,5, projection="3d")
-ax_cf.set_aspect("auto")
-ax_cf.set_autoscale_on(True)
+#ax_acc = f.add_subplot(2,3,4, projection="3d")
+#ax_acc.set_aspect("auto")
+#ax_acc.set_autoscale_on(True)
 
 ax_kf = f.add_subplot(2,3,6, projection="3d")
 ax_kf.set_aspect("auto")
@@ -73,8 +69,7 @@ def animate(idx):
         ax_roll.clear()
         ax_pitch.clear()
         ax_yaw.clear()
-        ax_acc.clear()
-        ax_cf.clear()
+        #ax_acc.clear()
         ax_kf.clear()
 
         # plot cube:
@@ -84,19 +79,20 @@ def animate(idx):
 
         for j in range(0, 2):
             # up/down
-            ax_acc.plot3D(*zip(pt_a[:, 0 + j], pt_a[:, 2 + j]), color="g")
-            ax_acc.plot3D(*zip(pt_a[:, 0 + j], pt_a[:, 4 + j]), color="g")
-            ax_acc.plot3D(*zip(pt_a[:, 4 + j], pt_a[:, 6 + j]), color="g")
-            ax_acc.plot3D(*zip(pt_a[:, 6 + j], pt_a[:, 2 + j]), color="g")
-            ax_acc.plot3D(*zip(pt_a[:, 0 + 2 * j], pt_a[:, 1 + 2 * j]), color="g")
-            ax_acc.plot3D(*zip(pt_a[:, 4 + 2 * j], pt_a[:, 5 + 2 * j]), color="g")
+            if False:
 
-            ax_cf.plot3D(*zip(pt_cf[:, 0 + j], pt_cf[:, 2 + j]), color="g")
-            ax_cf.plot3D(*zip(pt_cf[:, 0 + j], pt_cf[:, 4 + j]), color="g")
-            ax_cf.plot3D(*zip(pt_cf[:, 4 + j], pt_cf[:, 6 + j]), color="g")
-            ax_cf.plot3D(*zip(pt_cf[:, 6 + j], pt_cf[:, 2 + j]), color="g")
-            ax_cf.plot3D(*zip(pt_cf[:, 0 + 2 * j], pt_cf[:, 1 + 2 * j]), color="g")
-            ax_cf.plot3D(*zip(pt_cf[:, 4 + 2 * j], pt_cf[:, 5 + 2 * j]), color="g")
+                ax_cf.plot3D(*zip(pt_cf[:, 0 + j], pt_cf[:, 2 + j]), color="g")
+                ax_cf.plot3D(*zip(pt_cf[:, 0 + j], pt_cf[:, 4 + j]), color="g")
+                ax_cf.plot3D(*zip(pt_cf[:, 4 + j], pt_cf[:, 6 + j]), color="g")
+                ax_cf.plot3D(*zip(pt_cf[:, 6 + j], pt_cf[:, 2 + j]), color="g")
+                ax_cf.plot3D(*zip(pt_cf[:, 0 + 2 * j], pt_cf[:, 1 + 2 * j]), color="g")
+                ax_cf.plot3D(*zip(pt_cf[:, 4 + 2 * j], pt_cf[:, 5 + 2 * j]), color="g")
+                ax_acc.plot3D(*zip(pt_a[:, 0 + j], pt_a[:, 2 + j]), color="g")
+                ax_acc.plot3D(*zip(pt_a[:, 0 + j], pt_a[:, 4 + j]), color="g")
+                ax_acc.plot3D(*zip(pt_a[:, 4 + j], pt_a[:, 6 + j]), color="g")
+                ax_acc.plot3D(*zip(pt_a[:, 6 + j], pt_a[:, 2 + j]), color="g")
+                ax_acc.plot3D(*zip(pt_a[:, 0 + 2 * j], pt_a[:, 1 + 2 * j]), color="g")
+                ax_acc.plot3D(*zip(pt_a[:, 4 + 2 * j], pt_a[:, 5 + 2 * j]), color="g")
 
             ax_kf.plot3D(*zip(pt_kf[:, 0 + j], pt_kf[:, 2 + j]), color="g")
             ax_kf.plot3D(*zip(pt_kf[:, 0 + j], pt_kf[:, 4 + j]), color="g")
@@ -105,13 +101,13 @@ def animate(idx):
             ax_kf.plot3D(*zip(pt_kf[:, 0 + 2 * j], pt_kf[:, 1 + 2 * j]), color="g")
             ax_kf.plot3D(*zip(pt_kf[:, 4 + 2 * j], pt_kf[:, 5 + 2 * j]), color="g")
 
-        ax_acc.set_xlim([-10, 10])
-        ax_acc.set_ylim([-10, 10])
-        ax_acc.set_zlim([-10, 10])
-
-        ax_cf.set_xlim([-10, 10])
-        ax_cf.set_ylim([-10, 10])
-        ax_cf.set_zlim([-10, 10])
+        if False:
+            ax_cf.set_xlim([-10, 10])
+            ax_cf.set_ylim([-10, 10])
+            ax_cf.set_zlim([-10, 10])
+            ax_acc.set_xlim([-10, 10])
+            ax_acc.set_ylim([-10, 10])
+            ax_acc.set_zlim([-10, 10])
 
         ax_kf.set_xlim([-10, 10])
         ax_kf.set_ylim([-10, 10])
@@ -119,20 +115,21 @@ def animate(idx):
 
         #
         ax_roll.plot(t[1:idx], np.rad2deg(angles[0, 1:idx]), label='acc')
-        ax_roll.plot(t[1:idx], np.rad2deg(cf_angles[0, 1:idx]), label='cf')
+        #ax_roll.plot(t[1:idx], np.rad2deg(cf_angles[0, 1:idx]), label='cf')
         ax_roll.plot(t[1:idx], np.rad2deg(kf_angles[0, 1:idx]), label='kf')
 
         ax_pitch.plot(t[1:idx], np.rad2deg(angles[1, 1:idx]))
-        ax_pitch.plot(t[1:idx], np.rad2deg(cf_angles[1, 1:idx]))
+        #ax_pitch.plot(t[1:idx], np.rad2deg(cf_angles[1, 1:idx]))
         ax_pitch.plot(t[1:idx], np.rad2deg(kf_angles[1, 1:idx]))
 
         ax_yaw.plot(t[1:idx], np.rad2deg(angles[2, 1:idx]))
-        ax_yaw.plot(t[1:idx], np.rad2deg(cf_angles[2, 1:idx]))
+        #ax_yaw.plot(t[1:idx], np.rad2deg(cf_angles[2, 1:idx]))
         ax_yaw.plot(t[1:idx], np.rad2deg(kf_angles[2, 1:idx]))
 
         ax_roll.set_title('  t = ' + "{:.2f}".format(t[idx]))
-        ax_acc.set_title('pure Acc')
-        ax_cf.set_title('CF')
+        if False:
+            ax_cf.set_title('CF')
+            ax_acc.set_title('pure Acc')
         ax_kf.set_title('KF')
 
         ax_roll.set_ylim([-100,100])
